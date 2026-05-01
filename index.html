@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>scratch — a place for your randomness</title>
+  <link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body data-page="index">
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="index.html">
+        <span class="brand-mark">scratches</span>
+        <span class="brand-tag">notes</span>
+      </a>
+      <nav class="nav">
+        <a href="index.html" class="active">editor</a>
+        <a href="pages/notes.html">notes</a>
+        <a href="pages/quiz.html">quiz</a>
+        <a href="pages/summarize.html">summarize</a>
+        <a href="pages/support.html">support</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+
+    <div class="editor-head">
+      <span class="eyebrow">the editor</span>
+      <h1 class="display">pour out your <em>randomness</em>.</h1>
+    </div>
+
+    <div class="toolbar">
+      <div class="toolbar-group">
+        <button class="tool-btn" id="btn-new">new</button>
+        <button class="tool-btn" id="btn-open">open</button>
+        <button class="tool-btn accent" id="btn-save">save .txt</button>
+      </div>
+
+      <div class="toolbar-group grow">
+        <input type="text" class="filename-input" id="filename" placeholder="untitled.txt" autocomplete="off" spellcheck="false" />
+      </div>
+
+      <div class="toolbar-group">
+        <button class="tool-btn" id="btn-font-down" aria-label="smaller">A−</button>
+        <span class="font-size-display" id="font-size">17</span>
+        <button class="tool-btn" id="btn-font-up" aria-label="larger">A+</button>
+      </div>
+
+      <input type="file" id="file-input" accept=".txt,text/plain,.md,.markdown" style="display:none" />
+    </div>
+
+    <div class="sheet">
+      <textarea id="editor" placeholder="start typing, or open a .txt file…" spellcheck="true"></textarea>
+    </div>
+
+    <div class="stats-bar">
+      <div class="stats-group">
+        <span class="stat"><b id="stat-words">0</b> words</span>
+        <span class="stat"><b id="stat-chars">0</b> chars</span>
+        <span class="stat"><b id="stat-lines">0</b> lines</span>
+      </div>
+      <div class="save-status" id="save-status">empty</div>
+    </div>
+
+    <div class="editor-ai">
+      <span class="editor-ai-label">ai stuff (next week):</span>
+      <button class="btn ghost" id="ai-summarize">summarize this</button>
+      <button class="btn ghost" id="ai-quiz">make a quiz</button>
+    </div>
+
+  </main>
+
+  <footer class="site-footer">
+    a place where you pour out your <em>randomness</em> · scratch
+  </footer>
+
+  <script src="js/app.js"></script>
+</body>
+</html>

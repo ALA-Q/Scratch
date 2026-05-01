@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>quiz — scratch</title>
+  <link rel="stylesheet" href="../styles/styles.css" />
+</head>
+<body data-page="quiz">
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="../index.html">
+        <span class="brand-mark">scratch</span>
+        <span class="brand-tag">notes &amp; stuff</span>
+      </a>
+      <nav class="nav">
+        <a href="../index.html">editor</a>
+        <a href="notes.html">notes</a>
+        <a href="quiz.html" class="active">quiz</a>
+        <a href="summarize.html">summarize</a>
+        <a href="support.html">support</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+
+    <section class="section-head">
+      <span class="eyebrow">comprehension test</span>
+      <h1 class="display">test what <em>stuck</em>.</h1>
+      <p class="lead">
+        paste a passage, get a multiple-choice quiz on it. great for studying. AI integration is coming next iteration.
+      </p>
+    </section>
+
+    <div class="soon-panel">
+      <span class="soon-badge">next week · ai integration</span>
+      <h3>quiz feature is on the way</h3>
+      <p>
+        we're hooking this up to Groq's free AI next week. the layout is here, the textarea is here, all that's left is the brain.
+      </p>
+      <textarea id="quiz-source-text" placeholder="next week, paste your text here…" disabled style="margin-bottom: 16px; min-height: 120px; font-style: italic;"></textarea>
+      <button class="btn accent" id="quiz-coming-btn">generate quiz (soon)</button>
+    </div>
+
+  </main>
+
+  <footer class="site-footer">
+    a place where you pour out your <em>randomness</em> · scratch
+  </footer>
+
+  <script src="../js/app.js"></script>
+</body>
+</html>

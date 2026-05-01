@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>summarize — scratch</title>
+  <link rel="stylesheet" href="../styles/styles.css" />
+</head>
+<body data-page="summarize">
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="../index.html">
+        <span class="brand-mark">scratch</span>
+        <span class="brand-tag">notes &amp; stuff</span>
+      </a>
+      <nav class="nav">
+        <a href="../index.html">editor</a>
+        <a href="notes.html">notes</a>
+        <a href="quiz.html">quiz</a>
+        <a href="summarize.html" class="active">summarize</a>
+        <a href="support.html">support</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+
+    <section class="section-head">
+      <span class="eyebrow">ai · summarize</span>
+      <h1 class="display">tighten any <em>passage</em>.</h1>
+      <p class="lead">
+        paste long text, get a short summary. ai integration lands next iteration — the layout is ready and waiting.
+      </p>
+    </section>
+
+    <div style="margin-bottom: 18px; text-align: center;">
+      <span class="soon-badge">next week · ai integration</span>
+    </div>
+
+    <div class="sum-grid">
+
+      <div class="sum-panel">
+        <div class="sum-panel-header">
+          <div class="sum-panel-title">source</div>
+          <div class="sum-panel-meta">paste below</div>
+        </div>
+        <textarea id="sum-input" placeholder="next week, paste your text here…"></textarea>
+      </div>
+
+      <div class="sum-panel">
+        <div class="sum-panel-header">
+          <div class="sum-panel-title">summary</div>
+          <div class="sum-panel-meta">waiting on ai</div>
+        </div>
+        <div class="sum-output empty" id="sum-output">the summary will land here when AI is hooked up next week.</div>
+      </div>
+
+    </div>
+
+    <div class="sum-controls">
+      <button class="btn ghost" id="sum-clear">clear</button>
+      <button class="btn accent" id="sum-run">summarize (soon)</button>
+    </div>
+
+  </main>
+
+  <footer class="site-footer">
+    a place where you pour out your <em>randomness</em> · scratch
+  </footer>
+
+  <script src="../js/app.js"></script>
+</body>
+</html>

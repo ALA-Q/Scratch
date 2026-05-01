@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>notes — scratch</title>
+  <link rel="stylesheet" href="../styles/styles.css" />
+</head>
+<body data-page="notes">
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="../index.html">
+        <span class="brand-mark">scratch</span>
+        <span class="brand-tag">notes &amp; stuff</span>
+      </a>
+      <nav class="nav">
+        <a href="../index.html">editor</a>
+        <a href="notes.html" class="active">notes</a>
+        <a href="quiz.html">quiz</a>
+        <a href="summarize.html">summarize</a>
+        <a href="support.html">support</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+
+    <section class="section-head">
+      <span class="eyebrow">side notes</span>
+      <h1 class="display">little <em>thoughts</em>, kept around.</h1>
+      <p class="lead">
+        for stuff that doesn't belong in your main scratch. write it, save it, summon the AI to summarize it later (next week, when we plug it in).
+      </p>
+    </section>
+
+    <div class="note-editor">
+      <input type="text" id="note-title" placeholder="give it a title — or don't" />
+      <textarea id="note-body" placeholder="what's on your mind?"></textarea>
+      <div class="note-actions">
+        <button class="btn ghost" id="note-clear">clear</button>
+        <button class="btn" id="note-save">save scratch</button>
+      </div>
+    </div>
+
+    <div class="saved-header">
+      <h2>your <em>scratches</em></h2>
+      <span class="eyebrow" style="margin: 0;">newest on top</span>
+    </div>
+
+    <ul class="notes-list" id="notes-list"></ul>
+    <div class="empty-state" id="notes-empty">no scratches yet. write one above.</div>
+
+  </main>
+
+  <footer class="site-footer">
+    a place where you pour out your <em>randomness</em> · scratch
+  </footer>
+
+  <script src="../js/app.js"></script>
+</body>
+</html>
