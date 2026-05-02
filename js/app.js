@@ -14,7 +14,7 @@ const Store = {
   rawSet: (k, v) => localStorage.setItem(k, v),
 };
 
-/* ─── HELPERS ─────────────────────────────────────────────── */
+/*helpers*/
 
 function $(id) { return document.getElementById(id); }
 /*safety functions added to stop outer scripting*/
@@ -48,7 +48,7 @@ function initEditor() {
   const status   = $('save-status');
   const fontSizeEl = $('font-size');
 
-  // Restore previous session
+  /*File session load*/
   editor.value   = Store.raw(KEY.doc, '');
   filename.value = Store.raw(KEY.docName, '');
 
@@ -123,11 +123,11 @@ function initEditor() {
   $('btn-font-up').addEventListener('click',   () => { fontSize++; applyFont(); });
   $('btn-font-down').addEventListener('click', () => { fontSize--; applyFont(); });
 
-  // AI shortcuts (stubbed for next iteration)
+  /*ai tools place holder*/
   $('ai-summarize').addEventListener('click', () => comingSoon('summarize'));
   $('ai-quiz').addEventListener('click',      () => comingSoon('quiz'));
 
-  // Keyboard
+  /*keyboard*/
   editor.addEventListener('keydown', e => {
     const meta = e.ctrlKey || e.metaKey;
     if (meta && e.key === 's') { e.preventDefault(); $('btn-save').click(); }
