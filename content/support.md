@@ -25,3 +25,24 @@ Yes your data will be stored locally and load everytime you open the browser>
 
 **Why aren't the accounts real/Why isn't there a cloud based saving system?**
 We wanted to make this browser as simple and as safe as possible and we saw that making everything saved to localstorage is the best way to achieve that. 
+
+**Troubleshooting**
+**If your work disappeared after closing your tabs**
+you should make sure that you didn't clear your browser data, or make sure that you used a normal tab and not a private tab because they usually clear localstorage data automatically.
+
+**Line counter only counts the lines you havee when you press enter?**
+It is a problem we know of and we'll fix it soon, We just have limited resources. Will be fixed the next update 
+
+**Quiz and summarize pages don't have anything/ buttons do not generate 
+**we still haven't implemented the Ai and it will be implemented on the next update.
+
+**Text looks weird on my browser** 
+We use a Times New Roman with arabic fallback fonts that match Times New Roman, if the text does not look right it could be just another language than the supported one or it could be your browser blocking google fonts where we get our fonts from.
+
+
+
+**Error messages**
+
+
+
+
