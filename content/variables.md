@@ -12,7 +12,7 @@
     support        "support"          initSupport()
 
     
-  **  CSS VARIABLES (defined on :root in styles.css)**
+  **CSS VARIABLES (defined on :root in styles.css)**
    PAPER / SURFACE COLOURS
     --paper          #f6f3ec    main page background
     --paper-warm     #ede8da    cards and panels
