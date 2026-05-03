@@ -21,7 +21,7 @@ No we do not collect any data as students but your data might be collected by th
 Yes the website supports the usage of different devices.
 
 **Will my data be stores if i close my tabs?**
-Yes your data will be stored locally and load everytime you open the browser>
+Yes your data will be stored locally and load everytime you open the browser?
 
 **Why aren't the accounts real/Why isn't there a cloud based saving system?**
 We wanted to make this browser as simple and as safe as possible and we saw that making everything saved to localstorage is the best way to achieve that. 
