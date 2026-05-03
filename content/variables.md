@@ -1,4 +1,4 @@
-**  PAGES — body data attributes**
+**PAGES — body data attributes**
 
   Each HTML page sets data-page on <body>. app.js reads this and runs the
   matching initializer function.
