@@ -43,6 +43,18 @@ We use a Times New Roman with arabic fallback fonts that match Times New Roman, 
 
 **Error messages**
 
+**That File is huge bro, try something under 5mb**
+This oen is easy to understand it is just a heads up for any file more than 5mb we see that most txt files do not reach that size but we just put it in to that high.
+
+**Could not read that file**
+Either file is corrupted or in a format that the website does not take in, we only take in txt and md.
 
 
+
+**Keyboard shortcuts**
+CTRL+S = Save file 
+CTRL+O = Open file 
+Tab = insert 2 spaces
+
+Contact support for any problems 
 
