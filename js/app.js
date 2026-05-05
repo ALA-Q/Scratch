@@ -5,6 +5,8 @@ const KEY = {
   docName:  'scratch_doc_name',
   fontSize: 'scratch_font_size',
   notes:    'scratch_notes',
+  user:     'scratch_user_session',
+  accounts: 'scratch_accounts',
 };
 
 const Store = {
@@ -283,7 +285,6 @@ function inline(s) {
     .replace(/(^|[^*])\*([^*\n]+)\*(?!\*)/g, '$1<em>$2</em>');
 }
 
-/*loading md file in*/
 
 document.addEventListener('DOMContentLoaded', () => {
   const page = document.body.dataset.page;
@@ -295,3 +296,88 @@ document.addEventListener('DOMContentLoaded', () => {
     support:   initSupport,
   })[page]?.();
 });
+
+function initLogin() {
+  const tabs = document.querySelectorAll('.auth-tab');
+  const forms = document.querySelectorAll('.auth-form');
+  const signInMsg = $('signin-msg');
+  const signUpMsg = $('signup-msg');
+
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      tabs.forEach(t => t.classList.remove('active'));
+      forms.forEach(f => f.classList.remove('active'));
+      tab.classList.add('active');
+      $(tab.dataset.tab === 'signin' ? 'form-signin' : 'form-signup').classList.add('active');
+    });
+  });
+
+  $('form-signup').addEventListener('submit', (e) => {
+    e.preventDefault();
+    const user = $('signup-user').value.trim();
+    const pass = $('signup-pass').value;
+    const pass2 = $('signup-pass2').value;
+
+    if (!user || !pass) return showMsg(signUpMsg, 'fill in all fields', 'error');
+    if (pass !== pass2) return showMsg(signUpMsg, 'passwords do not match', 'error');
+
+    const accounts = Store.get(KEY.accounts, {});
+    if (accounts[user]) return showMsg(signUpMsg, 'username already taken', 'error');
+
+    accounts[user] = { password: pass, created: Date.now() };
+    Store.set(KEY.accounts, accounts);
+
+    const accountData = JSON.stringify({ user, password: pass });
+    downloadText(`${user}.account.txt`, accountData);
+
+    showMsg(signUpMsg, 'account created! downloading key file...', 'success');
+    
+    setTimeout(() => login(user), 1500);
+  });
+
+  $('form-signin').addEventListener('submit', (e) => {
+    e.preventDefault();
+    const user = $('signin-user').value.trim();
+    const pass = $('signin-pass').value;
+
+    const accounts = Store.get(KEY.accounts, {});
+    if (accounts[user] && accounts[user].password === pass) {
+      login(user);
+    } else {
+      showMsg(signInMsg, 'invalid username or password', 'error');
+    }
+  });
+
+  $('signin-file').addEventListener('change', async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    try {
+      const text = await file.text();
+      const data = JSON.parse(text);
+      if (data.user && data.password) {
+        // Add to local database if it's from another device
+        const accounts = Store.get(KEY.accounts, {});
+        accounts[data.user] = { password: data.password, created: Date.now() };
+        Store.set(KEY.accounts, accounts);
+        
+        login(data.user);
+      }
+    } catch (err) {
+      showMsg(signInMsg, 'corrupt or invalid account file', 'error');
+    }
+  });
+
+  $('auth-skip').addEventListener('click', () => {
+    window.location.href = '../index.html';
+  });
+
+  function showMsg(el, text, type) {
+    el.textContent = text;
+    el.className = `auth-msg ${type}`;
+  }
+
+  function login(username) {
+    Store.rawSet(KEY.user, username);
+    window.location.href = '../index.html';
+  }
+}
