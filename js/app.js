@@ -2,9 +2,9 @@ const KEY_DOC       = 'scratch_document';
 const KEY_DOC_NAME  = 'scratch_document_name';
 const KEY_FONT_SIZE = 'scratch_font_size';
 const KEY_NOTES     = 'scratch_notes';
-const KEY_ACCOUNTS  = 'scratch_accounts';      // { username: { hash, salt, created } }
-const KEY_SESSION   = 'scratch_session';       // current logged-in username
-const KEY_GATE_SKIP = 'scratch_gate_skipped';  // user clicked "skip" on login gate
+const KEY_ACCOUNTS  = 'scratch_accounts';     
+const KEY_SESSION   = 'scratch_session';       
+const KEY_GATE_SKIP = 'scratch_gate_skipped';  
 
 const Store = {
   get(k, fallback)  { try { const v = localStorage.getItem(k); return v == null ? fallback : JSON.parse(v); } catch { return fallback; } },
@@ -16,7 +16,6 @@ const Store = {
 
 
 
-/* ─── AUTH HELPERS ────────────────────────────────────────── */
 
 async function sha256(str) {
   const buf = new TextEncoder().encode(str);
@@ -39,7 +38,6 @@ function currentUser() { return Store.raw(KEY_SESSION, ''); }
 
 function signOut() {
   Store.remove(KEY_SESSION);
-  // Stay on the same page; chip will refresh on next load
   location.reload();
 }
 
@@ -82,14 +80,12 @@ function downloadText(filename, content) {
   URL.revokeObjectURL(url);
 }
 
-/* ─── ACCOUNT CHIP IN NAV ─────────────────────────────────── */
 
 function injectAccountChip() {
   const nav = document.querySelector('.nav');
   if (!nav) return;
   const user = currentUser();
   const isLoginPage = document.body.dataset.page === 'login';
-  // path prefix for the login link, depending on whether we're at root or in /pages
   const loginHref = document.body.dataset.page === 'index' ? 'pages/login.html' : 'login.html';
 
   if (user) {
@@ -107,7 +103,6 @@ function injectAccountChip() {
   }
 }
 
-/* ─── LOGIN PAGE ──────────────────────────────────────────── */
 
 function initLogin() {
   const tabs       = document.querySelectorAll('.auth-tab');
@@ -124,7 +119,6 @@ function initLogin() {
   const msgUp      = document.getElementById('signup-msg');
   const skipBtn    = document.getElementById('auth-skip');
 
-  // Skip — set the skip flag and go home, login page won't bug them again
   if (skipBtn) {
     skipBtn.addEventListener('click', () => {
       Store.rawSet(KEY_GATE_SKIP, '1');
@@ -132,7 +126,6 @@ function initLogin() {
     });
   }
 
-  // Tab switching
   tabs.forEach(t => t.addEventListener('click', () => {
     tabs.forEach(x => x.classList.remove('active'));
     forms.forEach(f => f.classList.remove('active'));
@@ -142,7 +135,6 @@ function initLogin() {
     msgUp.textContent = '';
   }));
 
-  // If already signed in, redirect home
   if (currentUser()) {
     msgIn.className = 'auth-msg ok';
     msgIn.textContent = `Already signed in as ${currentUser()}. Redirecting…`;
@@ -150,7 +142,6 @@ function initLogin() {
     return;
   }
 
-  // SIGN IN — username + password
   formIn.addEventListener('submit', async (e) => {
     e.preventDefault();
     msgIn.textContent = '';
@@ -180,7 +171,6 @@ function initLogin() {
     setTimeout(() => location.href = '../index.html', 700);
   });
 
-  // SIGN IN — via account file upload
   inFile.addEventListener('change', async (e) => {
     const file = e.target.files[0];
     if (!file) return;
@@ -189,7 +179,6 @@ function initLogin() {
       const text = await file.text();
       const parsed = parseAccountFile(text);
       if (!parsed) throw new Error('That file does not look like a Scratch account file.');
-      // Restore the account into local accounts store
       const accounts = getAccounts();
       accounts[parsed.username.toLowerCase()] = {
         salt: parsed.salt,
@@ -208,7 +197,6 @@ function initLogin() {
     inFile.value = '';
   });
 
-  // SIGN UP
   formUp.addEventListener('submit', async (e) => {
     e.preventDefault();
     msgUp.textContent = '';
@@ -251,7 +239,6 @@ function initLogin() {
     setAccounts(accounts);
     Store.rawSet(KEY_SESSION, username);
 
-    // Download the account file
     const fileText = buildAccountFile(username, account);
     downloadText(`${username}.account.txt`, fileText);
 
@@ -261,7 +248,6 @@ function initLogin() {
   });
 }
 
-/* ─── EDITOR (HOMEPAGE) ───────────────────────────────────── */
 
 function initEditor() {
   const filenameEl  = document.getElementById('filename');
@@ -278,13 +264,11 @@ function initEditor() {
   const linesEl     = document.getElementById('stat-lines');
   const saveStatus  = document.getElementById('save-status');
 
-  // Restore previous document
   const savedDoc  = Store.raw(KEY_DOC, '');
   const savedName = Store.raw(KEY_DOC_NAME, '');
   if (savedDoc) editorEl.value = savedDoc;
   if (savedName) filenameEl.value = savedName;
 
-  // Restore font size
   let fontSize = parseInt(Store.raw(KEY_FONT_SIZE, '17'), 10);
   applyFontSize();
 
@@ -295,7 +279,6 @@ function initEditor() {
     Store.rawSet(KEY_FONT_SIZE, String(fontSize));
   }
 
-  // Stats
   function updateStats() {
     const text = editorEl.value;
     const words = text.trim() ? text.trim().split(/\s+/).length : 0;
@@ -306,7 +289,6 @@ function initEditor() {
     linesEl.textContent = lines.toLocaleString();
   }
 
-  // Auto-save (debounced)
   let saveTimer = null;
   function markDirty() {
     saveStatus.classList.add('dirty');
@@ -323,7 +305,6 @@ function initEditor() {
   editorEl.addEventListener('input', () => { updateStats(); markDirty(); });
   filenameEl.addEventListener('input', markDirty);
 
-  // Open file
   openBtn.addEventListener('click', () => fileInput.click());
   fileInput.addEventListener('change', async (e) => {
     const file = e.target.files[0];
@@ -342,10 +323,9 @@ function initEditor() {
     } catch (err) {
       alert('Could not read file: ' + err.message);
     }
-    fileInput.value = ''; // allow re-opening the same file
+    fileInput.value = ''; 
   });
 
-  // Save file (download)
   saveBtn.addEventListener('click', () => {
     const text = editorEl.value;
     let name = filenameEl.value.trim() || 'untitled.txt';
@@ -361,7 +341,6 @@ function initEditor() {
     URL.revokeObjectURL(url);
   });
 
-  // New document
   newBtn.addEventListener('click', () => {
     if (editorEl.value.trim() && !confirm('Discard the current document? Anything unsaved will be lost.')) return;
     editorEl.value = '';
@@ -371,17 +350,15 @@ function initEditor() {
     editorEl.focus();
   });
 
-  // Font size
   fontUpBtn.addEventListener('click', () => { fontSize += 1; applyFontSize(); });
   fontDownBtn.addEventListener('click', () => { fontSize -= 1; applyFontSize(); });
 
-  // Keyboard shortcuts
   editorEl.addEventListener('keydown', (e) => {
     const meta = e.ctrlKey || e.metaKey;
     if (meta && e.key === 's') { e.preventDefault(); saveBtn.click(); }
     if (meta && e.key === 'o') { e.preventDefault(); openBtn.click(); }
     if (e.key === 'Tab') {
-      // insert two spaces, don't move focus
+
       e.preventDefault();
       const start = editorEl.selectionStart;
       const end = editorEl.selectionEnd;
@@ -395,7 +372,6 @@ function initEditor() {
   saveStatus.textContent = savedDoc ? 'Auto-saved' : 'Empty';
 }
 
-/* ─── NOTES PAGE ──────────────────────────────────────────── */
 
 function initNotes() {
   const titleEl = document.getElementById('note-title');
@@ -466,7 +442,6 @@ function initNotes() {
 
 
 
-/* ─── UTILITIES ───────────────────────────────────────────── */
 
 function escapeHtml(s) {
   return String(s).replace(/[&<>"']/g, c => ({
@@ -479,10 +454,8 @@ function formatDate(ts) {
   return d.toLocaleDateString(undefined, { day: '2-digit', month: 'short', year: 'numeric' });
 }
 
-/* ─── BOOT ────────────────────────────────────────────────── */
 
 document.addEventListener('DOMContentLoaded', () => {
-  // Login gate — if landing on homepage without a session and without having skipped, redirect to login
   const page = document.body.dataset.page;
   if (page === 'index' && !currentUser() && !Store.raw(KEY_GATE_SKIP, '')) {
     location.replace('pages/login.html?gate=1');
