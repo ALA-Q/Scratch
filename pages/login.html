@@ -3,23 +3,23 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Sign in · Folio</title>
+  <title>sign in — scratch</title>
   <link rel="stylesheet" href="../styles/styles.css" />
 </head>
-<body data-page="login" data-requires-api="false">
+<body data-page="login">
 
   <header class="site-header">
     <div class="header-inner">
       <a class="brand" href="../index.html">
-        <span class="brand-mark">Folio</span>
-        <span class="brand-tag">A plain-text editor</span>
+        <span class="brand-mark">scratch</span>
+        <span class="brand-tag">notes &amp; scribbles</span>
       </a>
       <nav class="nav">
-        <a href="../index.html">Editor</a>
-        <a href="notes.html">Notes</a>
-        <a href="quiz.html">Quiz</a>
-        <a href="summarize.html">Summarize</a>
-        <a href="support.html">Support</a>
+        <a href="../index.html">editor</a>
+        <a href="notes.html">notes</a>
+        <a href="quiz.html">quiz</a>
+        <a href="summarize.html">summarize</a>
+        <a href="support.html">support</a>
       </nav>
     </div>
   </header>
@@ -28,62 +28,60 @@
 
     <div class="auth-page">
 
-      <span class="eyebrow" style="text-align: center; display: block;">Account</span>
-      <h1 class="display" style="text-align: center;">Sign in to <em>Folio</em>.</h1>
+      <span class="eyebrow" style="text-align: center; display: block;">account</span>
+      <h1 class="display" style="text-align: center;">sign in to <em>scratch</em>.</h1>
       <p class="lead" style="text-align: center; margin: 0 auto 36px;">
-        Optional. The editor works without an account — this is just for keeping a personal record.
+        optional. the editor works without an account — this is just for keeping a personal record.
       </p>
 
       <div class="auth-card">
 
         <div class="auth-tabs">
-          <button class="auth-tab active" data-tab="signin">Sign in</button>
-          <button class="auth-tab" data-tab="signup">Sign up</button>
+          <button class="auth-tab active" data-tab="signin">sign in</button>
+          <button class="auth-tab" data-tab="signup">sign up</button>
         </div>
 
-        <!-- SIGN IN -->
         <form class="auth-form active" id="form-signin" autocomplete="off">
           <div class="field">
-            <label for="signin-user">Username</label>
+            <label for="signin-user">username</label>
             <input type="text" id="signin-user" autocomplete="username" />
           </div>
           <div class="field">
-            <label for="signin-pass">Password</label>
+            <label for="signin-pass">password</label>
             <input type="password" id="signin-pass" autocomplete="current-password" />
           </div>
 
-          <button type="submit" class="btn accent" style="width: 100%;">Sign in</button>
+          <button type="submit" class="btn accent" style="width: 100%;">sign in</button>
 
           <div class="auth-divider"><span>or</span></div>
 
           <label class="file-drop">
             <input type="file" id="signin-file" accept=".txt,text/plain" hidden />
-            <span class="file-drop-label">Sign in with account file (.txt)</span>
-            <span class="file-drop-hint">Click to choose your <em>username.account.txt</em></span>
+            <span class="file-drop-label">sign in with account file (.txt)</span>
+            <span class="file-drop-hint">click to choose your <em>username.account.txt</em></span>
           </label>
 
           <div class="auth-msg" id="signin-msg"></div>
         </form>
 
-        <!-- SIGN UP -->
         <form class="auth-form" id="form-signup" autocomplete="off">
           <div class="field">
-            <label for="signup-user">Choose a username</label>
+            <label for="signup-user">choose a username</label>
             <input type="text" id="signup-user" autocomplete="username" />
           </div>
           <div class="field">
-            <label for="signup-pass">Password</label>
+            <label for="signup-pass">password</label>
             <input type="password" id="signup-pass" autocomplete="new-password" />
           </div>
           <div class="field">
-            <label for="signup-pass2">Confirm password</label>
+            <label for="signup-pass2">confirm password</label>
             <input type="password" id="signup-pass2" autocomplete="new-password" />
           </div>
 
-          <button type="submit" class="btn accent" style="width: 100%;">Create account</button>
+          <button type="submit" class="btn accent" style="width: 100%;">create account</button>
 
           <p class="auth-fineprint">
-            On signup, a small <code>.txt</code> file is downloaded with your account record so you can sign in on other devices. Keep it safe.
+            on signup, a small <code>.txt</code> file is downloaded with your account record so you can sign in on other devices. keep it safe.
           </p>
 
           <div class="auth-msg" id="signup-msg"></div>
@@ -91,8 +89,12 @@
 
       </div>
 
+      <div class="auth-skip-row">
+        <button type="button" class="auth-skip-btn" id="auth-skip">skip for now →</button>
+      </div>
+
       <p class="auth-disclaimer">
-        Heads up: Folio has no server, so accounts live only in this browser. This is not secure authentication — please don't reuse a real password here.
+        heads up: scratch has no server, so accounts live only in this browser. this is not secure authentication — please don't reuse a real password here.
       </p>
 
     </div>
@@ -100,7 +102,7 @@
   </main>
 
   <footer class="site-footer">
-    Made with <em>care</em> · Folio
+    a place where you pour out your <em>randomness</em> · scratch
   </footer>
 
   <script src="../js/app.js"></script>
