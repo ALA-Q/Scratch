@@ -382,3 +382,13 @@ function initLogin() {
     window.location.href = '../index.html';
   }
 }
+function checkAuth() {
+  const currentPage = document.body.dataset.page;
+if (currentPage == 'login' return;
+  const isLoggedIn = Store.raw(KEY.USER, null);
+  const hasSkipped = Store.raw(KEY.SKIPPED, null);
+
+if (!isLoggedIn && !hasSkipped) {
+  windows.location.href = 'pages/login.html 
+    }
+}
