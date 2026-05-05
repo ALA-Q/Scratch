@@ -7,6 +7,7 @@ const KEY = {
   notes:    'scratch_notes',
   user:     'scratch_user_session',
   accounts: 'scratch_accounts',
+  skipped:  'scratch_skipped'
 };
 
 const Store = {
